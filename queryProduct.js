@@ -1,12 +1,15 @@
 const {Cart , Product, User} = require('./models')
 const Sequelize = require('sequelize');
-
+const productCart = require('./models')
 const findAllProducts = async () => {
     try {
-        const products = await Cart.findAll({
-            include: [{
-                model: Product
-            }]
+        const products = await Product.findAll({
+            include: [
+                {
+                    model: Cart,
+                },
+
+            ],
         });
         console.log("  Cart with their associated products:", JSON.stringify(products, null, 4));
     }
